@@ -185,7 +185,7 @@ module.exports = __webpack_require__(13);
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router, store) {
-  Vue.component("index-simple-link-button", __webpack_require__(3));
+  Vue.component("index-simple-link-button", __webpack_require__(3).default);
 });
 
 /***/ }),

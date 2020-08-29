@@ -72,18 +72,21 @@ class SimpleLinkButton extends Field
     public function classes($classes)
     {
         $this->classes = $classes;
+        
         return $this;
     }
 
     public function style($style)
     {
         $this->style = $style;
+
         return $this;
     }
 
     public function type($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
