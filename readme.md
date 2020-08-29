@@ -2,6 +2,8 @@
 
 Inspired by Nova Button (https://github.com/dillingham/nova-button) but only focus on displaying HTML tag with allowing passing all attributes.
 
+![screenshot of nova simple link button](https://user-images.githubusercontent.com/1147313/91624658-53c37880-e956-11ea-9e34-c9f31c480c3e.png)
+
 ### Installation
 
 ```bash
