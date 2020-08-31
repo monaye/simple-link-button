@@ -1,6 +1,6 @@
 ## Nova Simple Link Button
 
-Inspired by Nova Button (https://github.com/dillingham/nova-button) but only focus on displaying HTML tag with allowing passing all attributes.
+Inspired by Nova Button (https://github.com/dillingham/nova-button) but only focus on displaying HTML Links and allowing all attributes to be passed.
 
 ![screenshot of nova simple link button](https://user-images.githubusercontent.com/1147313/91624658-53c37880-e956-11ea-9e34-c9f31c480c3e.png)
 
@@ -29,7 +29,8 @@ public function fields(Request $request)
 
 ### Type & Style
 
-Default to `fill` & `primary`. Can be mismatch.
+Default type of the button is `fill` &  default style is `primary`.
+type and style can be mismatch.
 
 ```php
 SimpleLinkButton::make('Google', 'https://google.com')->type('fill'),
@@ -123,14 +124,36 @@ php artisan vendor:publish --tag=simple-link-button
 
 ### Visiblity
 
-You can show or hide the button by passing boolean to `visible`
+You can show or hide the button by passing boolean to the `visible` method.
 
 ```php
 SimpleLinkButton::make('Google', 'https://google.com')->visible($this->is_active == false),
 SimpleLinkButton::make('Google', 'https://google.com')->visible($this->is_active == true),
 ```
 
-Also [field authorization](https://nova.laravel.com/docs/1.0/resources/authorization.html#fields) via canSee() & [showing / hiding fields](https://nova.laravel.com/docs/1.0/resources/fields.html#showing-hiding-fields) hideFromIndex(), etc
+### Classes
+If you need to dynamically pass the class, pass class name to the `classes` method. **Notes: `classes` method will overwrite the `type` and `style` classes.**
+
+```php
+SimpleLinkButton::make('Google', 'https://google.com')->classes('my-own-class second-class'),
+
+// to add additional class you will need to combine with pre config classes
+// get classes from config file out slide of
+$defaultClasses = Arr::get(config('simple-link-button'), "buttons.fill.primary")
+
+// add additional class
+SimpleLinkButton::make('Google', 'https://google.com')->classes("myClass ${defaultClass}"),
+```
+
+### Attributes
+You are free to pass any attributes to the HTML Link by passing `key => value` array to the `attributes` method.
+
+
+```php
+SimpleLinkButton::make('Google', 'https://google.com')->attributes(['target' => '_blank']),
+SimpleLinkButton::make('Download Pic', '/my-image.png')->attributes(['download'=>'download-image.png', 'title' => 'Download Image']),
+```
+
 
 # Author
 
