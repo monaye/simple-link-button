@@ -22,6 +22,7 @@ class FieldServiceProvider extends ServiceProvider
 
         Nova::serving(function (ServingNova $event) {
             Nova::script('simple-link-button', __DIR__.'/../dist/js/field.js');
+            Nova::style('simple-link-button', __DIR__.'/../dist/css/field.css');
         });
     }
 
