@@ -23,15 +23,15 @@ class SimpleLinkButton extends Field
     const BUTTON_TYPE_LINK = 'link';
 
     public $component = 'simple-link-button';
-    public $linkText; 
+    public $linkText;
     public $url;
     public $attributes;
     public $style = self::BUTTON_PRIMARY;
     public $type = self::BUTTON_TYPE_FILL;
     public $visible = true;
-    public $classes = NULL;
+    public $classes = null;
 
-    public function __construct($linkText, $url)
+    public function __construct($linkText, $url = null)
     {
         $this->linkText = $linkText;
         $this->url = $url;
@@ -40,19 +40,23 @@ class SimpleLinkButton extends Field
     public function resolve($resource, $attribute = null)
     {
         parent::resolve($resource, $attribute);
-        
-        $classes = $this->classes; 
 
-        if($classes === NULL) {
+        $classes = $this->classes;
+
+        if ($classes === null) {
             $classes = Arr::get(config($this->component), "buttons.{$this->type}.{$this->style}");
         }
-        
+
+        $url = is_callable($this->url) ? call_user_func($this->url) : $this->url;
+
+        $visible = is_callable($this->visible) ? call_user_func($this->visible) : $this->visible;
+
         $this->withMeta([
-            'linkText' => $this->linkText, 
-            'url' => $this->url,
-            'attributes' => $this->attributes, 
+            'linkText' => $this->linkText,
+            'url' => $url,
+            'attributes' => $this->attributes,
             'classes' => $classes,
-            'visible' => $this->visible,
+            'visible' => $visible,
         ]);
     }
 
@@ -72,7 +76,7 @@ class SimpleLinkButton extends Field
     public function classes($classes)
     {
         $this->classes = $classes;
-        
+
         return $this;
     }
 
@@ -93,7 +97,14 @@ class SimpleLinkButton extends Field
     public function visible($visible)
     {
         $this->visible = $visible;
-        
+
+        return $this;
+    }
+
+    public function url($url)
+    {
+        $this->url = $url;
+
         return $this;
     }
 }
